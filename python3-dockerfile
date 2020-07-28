@@ -1,0 +1,6 @@
+FROM centos:7.4
+ADD Python-3.8.4 /usr/local/python3
+RUN rpm --rebuilddb && yum -y install gcc automake autoconf libtool make && yum install -y gcc-c++ install libffi-devel && yum install -y mysql-devel gcc-devel python-devel && yum install -y openldap-devel
+RUN cd /usr/local/python3 && ./configure --prefix=/usr/local/python3 && make && make install
+ENV PATH=$PATH:/usr/local/python3/bin
+RUN pip3 install --upgrade pip -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com
